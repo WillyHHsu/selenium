@@ -23,6 +23,7 @@ class Crawler():
         return all names
         """
         _ = self.driver.find_element_by_id('ddlFundos').find_elements_by_tag_name('tr')
+
         c0 = []
         c1 = []
         c2 = []
@@ -37,7 +38,11 @@ class Crawler():
     def get_dropdown(self):
         drop_down_list = [i.strip() for i in self.driver.find_element_by_name("ddComptc").text.split('\n')]
         return drop_down_list[:-1]
-    
+
+    def choose_document(self, doc):
+        if doc == 1:
+            self.driver.find_element_by_id('trInfDiar').click()
+
     def get_data(self, drop_down_list):
         
         drop_down_list = [i.strip() for i in self.driver.find_element_by_name("ddComptc").text.split('\n')]
@@ -59,8 +64,9 @@ class Crawler():
                 col8.append(drop_down_list[k])
         
         return {'Dia':col0, 'Quota':col1, 'Captação_no_Dia':col2 
-                ,'Resgate_no_Dia':col3,'Patrimônio_Líquido':col4,'Total da Carteira':col5,
-                'N°_Total_de_Cotistas':col6,'Data_da_próxima_informação_do_PL':col7,'Mes_Ano':col8}
+                ,'Resgate_no_Dia':col3,'Patrimônio_Líquido':col4,'Total da Carteira':col5
+                ,'N°_Total_de_Cotistas':col6,'Data_da_próxima_informação_do_PL':col7
+                ,'Data':[i+'/'+j for i,j in zip(col0,col8)]}
         
     def quit(self):
         self.driver.quit()
