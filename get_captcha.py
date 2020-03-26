@@ -44,4 +44,4 @@ for i in range(loop_range):
         url = "https://cvmweb.cvm.gov.br/SWB//Sistemas/SCW/CPublica/RandomTxt.aspx?v1=0,846738362147817"
         urllib.request.urlretrieve(url, filename)
     except Exception as err:
-        print(err)    
+        print(err)  
